@@ -1,6 +1,8 @@
 package main;
 
+import java.io.*;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -8,63 +10,26 @@ import java.util.TreeSet;
  * Created by Ekaterina Semenova on 17.03.2018.
  */
 public class KeyWordsSet {
-    private static final Set<String> keyWordsSet = new TreeSet<>();
-     static {
-        keyWordsSet.add("abstract");
-        keyWordsSet.add("continue");
-        keyWordsSet.add("for");
-        keyWordsSet.add("new");
-        keyWordsSet.add("switch");
-        keyWordsSet.add("assert");
-        keyWordsSet.add("default");
-        keyWordsSet.add("goto");
-        keyWordsSet.add("package");
-        keyWordsSet.add("synchronized");
-        keyWordsSet.add("boolean");
-        keyWordsSet.add("do");
-        keyWordsSet.add("private");
-        keyWordsSet.add("if");
-        keyWordsSet.add("this");
-        keyWordsSet.add("break");
-        keyWordsSet.add("double");
-        keyWordsSet.add("implements");
-        keyWordsSet.add("protected");
-        keyWordsSet.add("throw");
-        keyWordsSet.add("import");
-        keyWordsSet.add("byte");
-        keyWordsSet.add("else");
-        keyWordsSet.add("throws");
-        keyWordsSet.add("public");
-        keyWordsSet.add("case");
-        keyWordsSet.add("enum");
-        keyWordsSet.add("instanceof");
-        keyWordsSet.add("return");
-        keyWordsSet.add("transient");
-        keyWordsSet.add("extends");
-        keyWordsSet.add("catch");
-        keyWordsSet.add("int");
-        keyWordsSet.add("short");
-        keyWordsSet.add("try");
-        keyWordsSet.add("final");
-        keyWordsSet.add("interface");
-        keyWordsSet.add("static");
-        keyWordsSet.add("void");
-        keyWordsSet.add("char");
-        keyWordsSet.add("finally");
-        keyWordsSet.add("long");
-        keyWordsSet.add("strictfp");
-        keyWordsSet.add("class");
-        keyWordsSet.add("volatile");
-        keyWordsSet.add("float");
-        keyWordsSet.add("const");
-        keyWordsSet.add("native");
-        keyWordsSet.add("super");
-        keyWordsSet.add("while");
-        keyWordsSet.add("true");
-        keyWordsSet.add("false");
-        keyWordsSet.add("null");
+    private static final Set<String> keyWordsSet = new HashSet<>();
+    private static final String keywordsFile = "src\\main\\resources\\keywords.txt";
+
+    static {
+        try {
+            Scanner scanner = new Scanner(new File(keywordsFile));
+            while (scanner.hasNext()) {
+                keyWordsSet.add(scanner.next());
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
-    public static Set<String> getKeyWordsSet(){
-         return keyWordsSet;
+
+    public static Set<String> getKeyWordsSet() {
+        return keyWordsSet;
     }
+
+    public static boolean contains(String word) {
+        return keyWordsSet.contains(word);
+    }
+
 }

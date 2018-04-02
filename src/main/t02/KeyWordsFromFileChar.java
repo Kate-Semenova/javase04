@@ -3,6 +3,7 @@ package main.t02;
 import main.KeyWordsSet;
 
 import java.io.*;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -12,7 +13,7 @@ import java.util.TreeMap;
 public class KeyWordsFromFileChar {
     private File inPutFile;
     private File outPutFile;
-    private Map<String, Integer> map = new TreeMap<>();
+    private Map<String, Integer> map = new HashMap<>();
 
     public KeyWordsFromFileChar(File inPutFile){
         this.inPutFile = inPutFile;
@@ -47,7 +48,7 @@ public class KeyWordsFromFileChar {
                 char character = (char) val;
                 if (!Character.isAlphabetic(character)) {
                     String stringWord = word.toString();
-                    if (KeyWordsSet.getKeyWordsSet().contains(stringWord)) {
+                    if (KeyWordsSet.contains(stringWord)) {
                         if (map.containsKey(stringWord)) {
                             map.put(word.toString(), map.get(stringWord) + 1);
                         } else {
@@ -83,7 +84,6 @@ public class KeyWordsFromFileChar {
 
             stringBuilder.append("\n");
         }
-        int length = stringBuilder.length();
         try (Writer writer = new BufferedWriter(new FileWriter(outPutFile))) {
             writer.write(stringBuilder.toString());
         } catch (IOException exception) {
@@ -91,7 +91,7 @@ public class KeyWordsFromFileChar {
         }
     }
     public static void main(String[] args) {
-        KeyWordsFromFileChar keyWordsFromFileChar = new KeyWordsFromFileChar(new File("src\\main\\file\\javaCode"));
+        KeyWordsFromFileChar keyWordsFromFileChar = new KeyWordsFromFileChar(new File("src\\main\\resources\\javaCode"));
         System.out.println(keyWordsFromFileChar.getKeyWords());
         keyWordsFromFileChar.putWordsInFile();
     }

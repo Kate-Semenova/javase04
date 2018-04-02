@@ -1,4 +1,4 @@
-package main.t02;
+package main.resources;
 
 import layout.TableLayout;
 

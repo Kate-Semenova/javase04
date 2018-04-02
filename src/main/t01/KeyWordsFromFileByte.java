@@ -13,7 +13,7 @@ import java.util.TreeMap;
 public class KeyWordsFromFileByte {
     private File inPutFile;
     private File outPutFile;
-    private Map<String, Integer> map = new TreeMap<>();
+    private Map<String, Integer> map = new HashMap<>();
 
     public KeyWordsFromFileByte(File inPutFile) {
         this.inPutFile = inPutFile;
@@ -50,7 +50,7 @@ public class KeyWordsFromFileByte {
                 char character = (char) val;
                 if (!Character.isAlphabetic(character)) {
                     String stringWord = word.toString();
-                    if (KeyWordsSet.getKeyWordsSet().contains(stringWord)) {
+                    if (KeyWordsSet.contains(stringWord)) {
                         if (map.containsKey(stringWord)) {
                             map.put(word.toString(), map.get(stringWord) + 1);
                         } else {
@@ -102,7 +102,7 @@ public class KeyWordsFromFileByte {
     }
 
     public static void main(String[] args) {
-        KeyWordsFromFileByte keyWordsFromFileByte = new KeyWordsFromFileByte(new File("src\\main\\file\\javaCode"));
+        KeyWordsFromFileByte keyWordsFromFileByte = new KeyWordsFromFileByte(new File("src\\main\\resources\\javaCode"));
 
         System.out.println(keyWordsFromFileByte.getKeyWords());
         keyWordsFromFileByte.putWordsInFile();
